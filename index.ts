@@ -3,6 +3,8 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import cors from 'cors';
 
+import postRoutes from './routes/posts';
+
 const MONGODB_USERNAME = 'felipehw';
 const MONGODB_PASSWORD = '389rfhj93';
 const MONGODB_CONNECTION_URL = `mongodb+srv://${MONGODB_USERNAME}:${MONGODB_PASSWORD}@cluster0.dwls5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
@@ -10,6 +12,8 @@ const MONGODB_CONNECTION_URL = `mongodb+srv://${MONGODB_USERNAME}:${MONGODB_PASS
 const PORT = process.env.PORT || 5000;
 
 const app = express();
+
+app.use('/posts', postRoutes);
 
 app.use(bodyParser.json({
     limit: '30mb',
