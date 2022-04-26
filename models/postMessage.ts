@@ -1,6 +1,16 @@
 import mongoose from "mongoose";
 
-const postSchema = new mongoose.Schema({
+interface IPost {
+    title: string,
+    message: string,
+    creator: string,
+    tags: string[],
+    selectedFile: string,
+    likeCount: number,
+    createdAt: Date,
+};
+
+const postSchema = new mongoose.Schema<IPost>({
     title: String,
     message: String,
     creator: String,
@@ -16,6 +26,6 @@ const postSchema = new mongoose.Schema({
     },
 });
 
-const PostMessage = mongoose.model('PostMessage', postSchema);
+const PostMessage = mongoose.model<IPost>('PostMessage', postSchema);
 
 export default PostMessage;
