@@ -1,6 +1,6 @@
 import express from "express";
 
-import PostMessage from "../models/postMessage";
+import PostMessage, { IDraftPost } from "../models/postMessage";
 
 const getPosts = async (req: express.Request, res: express.Response) => {
     try {
@@ -13,7 +13,7 @@ const getPosts = async (req: express.Request, res: express.Response) => {
 };
 
 const createPost = async (req: express.Request, res: express.Response) => {
-    const postData = req.body;
+    const postData = (req.body as IDraftPost);
     const newPost = new PostMessage(postData);
 
     try {

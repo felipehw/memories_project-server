@@ -1,5 +1,13 @@
 import mongoose from "mongoose";
 
+interface IDraftPost {
+    title: string,
+    message: string,
+    creator: string,
+    tags: string[],
+    selectedFile: string,
+};
+
 interface IPost {
     title: string,
     message: string,
@@ -28,4 +36,4 @@ const postSchema = new mongoose.Schema<IPost>({
 
 const PostMessage = mongoose.model<IPost>('PostMessage', postSchema);
 
-export default PostMessage;
+export {PostMessage as default, IDraftPost};
