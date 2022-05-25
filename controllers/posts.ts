@@ -1,4 +1,5 @@
 import express from "express";
+import mongoose from "mongoose";
 
 import PostMessage, { IDraftPost } from "../models/postMessage";
 
@@ -25,4 +26,16 @@ const createPost = async (req: express.Request, res: express.Response) => {
     }
 };
 
-export { createPost, getPosts };
+const updatePost = async (req: express.Request, res: express.Response) => {
+    const { id : _id } = req.params;
+    const post = (req.body as Partial<IDraftPost>);
+
+    if (!mongoose.Types.ObjectId.isValid(_id)) {
+        return res.status(404).send('No post with that id');
+    }
+
+    const updatedPost = await PostMessage.findByIdAndUpdate(_id, post, { new: true });
+    res.json(updatedPost);
+};
+
+export { createPost, getPosts, updatePost };

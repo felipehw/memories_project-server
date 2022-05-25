@@ -15,6 +15,7 @@ const app = express();
 
 app.use(bodyParser.json({
     limit: '30mb',
+    type: ['application/json', 'application/merge-patch+json'],
     //extended: true, // the tutorial contains this, but it is not a valid key
 }));
 app.use(bodyParser.urlencoded({
@@ -23,6 +24,11 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cors()); // Enable All CORS Requests
 app.use('/posts', postRoutes);
+app.all('*', (req: express.Request, res: express.Response) => { // Debug only
+    console.log('Catch all route.');
+    console.log(req);
+    return res.status(404).send('Catch all route: 404');
+});
 
 mongoose.connect(MONGODB_CONNECTION_URL)
     .then(() => {
