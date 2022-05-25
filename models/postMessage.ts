@@ -8,12 +8,7 @@ interface IDraftPost {
     selectedFile: string,
 };
 
-interface IPost {
-    title: string,
-    message: string,
-    creator: string,
-    tags: string[],
-    selectedFile: string,
+interface IPost extends IDraftPost {
     likeCount: number,
     createdAt: Date,
 };
