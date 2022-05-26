@@ -30,5 +30,8 @@ const postSchema = new mongoose.Schema<IPost>({
 });
 
 const PostMessage = mongoose.model<IPost>('PostMessage', postSchema);
+type IPostMessageDocument = mongoose.Document<unknown, any, IPost> & IPost & {
+    _id: mongoose.Types.ObjectId;
+};
 
-export {PostMessage as default, IDraftPost};
+export {PostMessage as default, IDraftPost, IPost, IPostMessageDocument};

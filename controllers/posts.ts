@@ -1,7 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 
-import PostMessage, { IDraftPost } from "../models/postMessage";
+import PostMessage, { IDraftPost, IPostMessageDocument } from "../models/postMessage";
 
 const getPosts = async (req: express.Request, res: express.Response) => {
     try {
@@ -49,4 +49,15 @@ const deletePost = async (req: express.Request, res: express.Response) => {
     res.json(`Post deleted successfully: ${_id}`);
 };
 
-export { createPost, getPosts, updatePost, deletePost };
+const likePost = async (req: express.Request, res: express.Response) => {
+    const { id : _id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(_id)) {
+        return res.status(404).send('No post with that id');
+    }
+    const post = (await PostMessage.findById(_id) as IPostMessageDocument);
+    const updatedPost = await PostMessage.findByIdAndUpdate(_id, { likeCount: post.likeCount + 1 }, { new: true });
+    res.json(updatedPost);
+};
+
+export { createPost, deletePost, getPosts, likePost, updatePost };
