@@ -1,3 +1,4 @@
+import './env';
 import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
@@ -5,11 +6,8 @@ import cors from 'cors';
 
 import postRoutes from './routes/posts';
 
-const MONGODB_USERNAME = 'felipehw';
-const MONGODB_PASSWORD = '389rfhj93';
-const MONGODB_CONNECTION_URL = `mongodb+srv://${MONGODB_USERNAME}:${MONGODB_PASSWORD}@cluster0.dwls5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
-
-const PORT = process.env.PORT || 5000;
+const MONGODB_CONNECTION_URL = (process.env.MONGODB_CONNECTION_URL as string);
+const PORT = process.env.PORT || '5000';
 
 const app = express();
 
