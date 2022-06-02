@@ -11,6 +11,7 @@ const PORT = process.env.PORT || '5000';
 
 const app = express();
 
+// Middlewares
 app.use(bodyParser.json({
     limit: '30mb',
     type: ['application/json', 'application/merge-patch+json'],
@@ -21,6 +22,11 @@ app.use(bodyParser.urlencoded({
     extended: true, // true is the default value. See more at <https://www.npmjs.com/package/body-parser>
 }));
 app.use(cors()); // Enable All CORS Requests
+
+// Routes
+app.get('/', (req: express.Request, res: express.Response) => {
+    res.send('Hello to Memories API');
+});
 app.use('/posts', postRoutes);
 app.all('*', (req: express.Request, res: express.Response) => { // Debug only
     console.log('Catch all route.');
