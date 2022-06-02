@@ -24,7 +24,8 @@
     "dotenv-expand": "^8.0.3",
     "express": "^4.17.3",
     "mongoose": "^6.2.10",
-    "ts-node": "^10.8.0"
+    "ts-node": "^10.8.0",
+    "typescript": "^4.7.2"
   },
   "nodemonConfig": {
     "watch": [
