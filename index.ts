@@ -9,6 +9,8 @@ import postRoutes from './routes/posts';
 const MONGODB_CONNECTION_URL = (process.env.MONGODB_CONNECTION_URL as string);
 const PORT = process.env.PORT || '5000';
 
+if (!MONGODB_CONNECTION_URL) throw new Error("MONGODB_CONNECTION_URL isn't defined in '.env' file");
+
 const app = express();
 
 // Middlewares
